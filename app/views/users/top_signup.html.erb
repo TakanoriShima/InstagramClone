@@ -1,0 +1,112 @@
+<br>
+<div class="jumbotron">
+  <h1>InstagramClone</h1>
+  <p>クリエイティブな写真を簡単にWebへアップして、友達や家族とシェアしよう</p>
+  <p><%= link_to "いま、シェアされた写真を見る", pictures_path , class: 'btn btn-default btn-lg' %></p>
+</div>
+
+<!-- タブ・メニュー -->
+<ul class="nav nav-tabs">
+  <li>
+    <a href="#login" data-toggle="tab">
+      ログインする
+    </a>
+  </li>
+  <li class="active">
+    <a href="#signup" data-toggle="tab">
+      ユーザ登録する
+    </a>
+  </li>
+</ul>
+
+<!-- タブ内容 -->
+<br>
+<div class="tab-content">
+
+  <div class="tab-pane" id="login">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="閉じる">
+          <span aria-hidden="true">×</span>
+        </button>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      </div>
+    <% end %>
+
+    <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+
+      <div class="input-group">
+        <%= f.email_field :email, class: 'form-control', placeholder: "Email" %>
+      </div>
+      <br>
+      <div class="input-group">
+        <%= f.password_field :password, class: 'form-control', placeholder: "Password" %>
+      </div>
+      <br>
+      <div class="pull-right">
+        <%= f.submit "ログイン", class: 'btn btn-primary' %>
+      </div>
+
+    <% end %>
+
+  </div>
+
+  <div class="tab-pane active" id="signup">
+
+      <% if flash[:notice] %>
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="閉じる">
+            <span aria-hidden="true">×</span></button>
+          <strong>お知らせ</strong>
+          ：
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+
+      <% if @user.errors.any? %>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="閉じる">
+            <span aria-hidden="true">×</span>
+          </button>
+          <strong><%= @user.errors.count %>件のエラーがあります。ご確認ください。</strong>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+        <%= form_with(model: @user, local: true) do |f| %>
+          <div class="input-group">
+            <%= f.text_field :name, class: 'form-control', placeholder: "Name：テスト太郎" %>
+          </div>
+          <br>
+          <div class="input-group">
+            <%= f.email_field :email, class: 'form-control', placeholder: "Email：test@sample.com" %>
+          </div>
+          <br>
+          <div class="input-group">
+            <%= f.password_field :password, class: 'form-control', placeholder: "Password（6文字以上）" %>
+          </div>
+          <br>
+          <div class="input-group">
+            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Password（確認用）" %>
+          </div>
+          <br>
+
+          <div class="input-group">
+            <span class="input-group-addon">アイコン画像（任意）</span>
+            <%= f.file_field :image, class: 'form-control', id: :user_image %>
+            <%= f.hidden_field :image_cache %>
+          </div>
+          <br>
+
+          <div class="pull-right">
+            <%= f.submit "ユーザ登録", class: 'btn btn-primary' %>
+          </div>
+
+        <% end %>
+  </div>
+
+</div>

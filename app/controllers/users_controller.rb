@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-
   def new
     @user = User.new
+    render 'top'
   end
 
   def create
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user.id), notice: 'ユーザ登録が完了しました'
     else
-      render 'new'
+      render 'top_signup'
     end
   end
 
@@ -24,5 +24,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email,
                                  :password, :password_confirmation, :image)
   end
-
 end

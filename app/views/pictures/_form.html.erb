@@ -1,0 +1,38 @@
+<%= form_with(model: @picture, local: true ,url: choose_new_or_edit, class: 'new_picture_form' ) do |form| %>
+
+<% if @picture.errors.any? %>
+  <div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="閉じる">
+      <span aria-hidden="true">×</span></button>
+    <strong><%= @picture.errors.count %>件のエラーがあります。ご確認ください。</strong>
+    <ul>
+      <% @picture.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<div class="input-group">
+  <span class="input-group-addon">写真を選択</span>
+  <% if @picture.image? %>
+    <ul class="list-group" style="margin-bottom: 0px;">
+      <li class="list-group-item">
+        <%= image_tag(@picture.image.url, :class => "img-thumbnail", :width => "300") %>
+      </li>
+    </ul>
+  <% end %>
+  <%= form.file_field :image, class: 'form-control', id: :picture_image%>
+  <%= form.hidden_field :image_cache %>
+</div>
+<br>
+<div class="input-group">
+  <%= form.text_area :comment, class: 'form-control', placeholder: "写真にコメントを添えましょう。（任意）" %>
+</div>
+
+<br>
+<div class="pull-right">
+  <%= form.submit "送信する", class: 'btn btn-primary' %>
+</div>
+<% end %>

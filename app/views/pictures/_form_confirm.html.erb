@@ -1,0 +1,33 @@
+<%= form_with(model: @picture, url: pictures_path, local: true) do |form| %>
+<%= form.hidden_field :comment %>
+
+<div class="input-group" style="margin-bottom: 20px;">
+  <span class="input-group-addon">写真</span>
+  <ul class="list-group" style="margin-bottom: 0px;">
+    <li class="list-group-item">
+      <%= image_tag(@picture.image.url, :class => "img-thumbnail", :width => "300") %>
+      <%= hidden_field_tag :"cache[image]", @picture.image.cache_name %>
+    </li>
+  </ul>
+</div>
+
+<% if @picture.comment? %>
+  <div class="input-group">
+    <%= form.text_area :comment, class: 'form-control', readonly: 'readonly' %>
+  </div>
+  <br>
+<% end %>
+
+<div class="pull-right" style="margin-left: 20px;">
+  <%= form.submit "投稿する", class: 'btn btn-primary' %>
+</div>
+<% end %>
+
+<%= form_with(model: @picture, url: new_picture_path, local: true, method: 'get') do |form| %>
+<%= form.hidden_field :comment %>
+<%= form.hidden_field :image_cache %>
+<%= hidden_field_tag :"cache[image]",@picture.image.cache_name %>
+<div class="pull-right">
+<%= form.submit "もどる", class: 'btn btn-default', name: 'back' %>
+</div>
+<% end %>

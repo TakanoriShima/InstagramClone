@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+    <br>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="閉じる">
+          <span aria-hidden="true">×</span></button>
+        <strong>お知らせ</strong>：<%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-xs-2">
+        <%= image_tag('/tw-icon.png', :style => "width: 83px; height: 83px; object-fit: cover;", :class => "img-circle") unless @user.image.url %>
+        <%= image_tag(@user.image.url, :style => "width: 83px; height: 83px; object-fit: cover;", :class => "img-circle") if @user.image.url %>
+      </div>
+      <div class="col-xs-10">
+        <p class="lead"><%= @user.name %></p>
+        <p><%= @user.email %></p>
+        <p>投稿<%= @user.pictures.count %>件</p>
+      </div>
+    </div>
+
+    <!-- タブ・メニュー -->
+    <br>
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#favorite_pictures" data-toggle="tab">
+          <strong>
+            お気に入りの投稿
+            <span class="badge"><%= @user.favorite_pictures.count %></span>
+          </strong>
+        </a>
+      </li>
+      <li>
+        <a href="#my_pictures" data-toggle="tab">
+          <strong>
+            自分の投稿
+            <span class="badge"><%= @user.pictures.count %></span>
+          </strong>
+        </a>
+      </li>
+    </ul>
+
+    <!-- タブ内容 -->
+    <br>
+    <div class="tab-content">
+
+      <div class="tab-pane active" id="favorite_pictures">
+        <div class="row">
+
+        <% @user.favorite_pictures.order("updated_at DESC").each do |picture| %>
+          <div class="col-xs-4">
+            <!-- <%= image_tag(picture.image.url, :class => "img-thumbnail", :style => "width: 100%; object-fit: cover;") %> -->
+             <%= link_to image_tag(picture.image.url, :class => "img-thumbnail" ), picture_path(picture.id) %>
+          </div>
+        <% end %>
+
+        </div>
+      </div>
+
+      <div class="tab-pane" id="my_pictures">
+        <div class="row">
+
+        <% @user.pictures.order("updated_at DESC").each do |picture| %>
+          <div class="col-xs-4">
+            <%= image_tag(picture.image.url, :class => "img-thumbnail", :style => "width: 100%; object-fit: cover;") %>
+          </div>
+        <% end %>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

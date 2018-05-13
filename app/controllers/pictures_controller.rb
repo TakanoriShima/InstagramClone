@@ -1,27 +1,27 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: %i[show edit update destroy]
-  before_action :is_login, only: %i[new edit destroy]
+  before_action :login?, only: %i[new edit destroy]
 
   def index
-    @pictures = picture.all
+    @pictures = Picture.all
   end
 
   def new
     @picture = if params[:back]
-                 picture.new(picture_params)
+                 Picture.new(picture_params)
                else
-                 picture.new
+                 Picture.new
                end
   end
 
   def confirm
-    @picture = picture.new(picture_params)
+    @picture = Picture.new(picture_params)
     @picture.user_id = current_user.id
     render :new if @picture.invalid?
   end
 
   def create
-    @picture = picture.new(picture_params)
+    @picture = Picture.new(picture_params)
     @picture.user_id = current_user.id
 
     if params.key?(:cache)
@@ -29,7 +29,7 @@ class PicturesController < ApplicationController
     end
 
     if @picture.save
-      pictureMailer.picture_mail(@picture).deliver
+      #PictureMailer.picture_mail(@picture).deliver
       redirect_to pictures_path, notice: '投稿しました >>> 投稿完了のメールを送信しました'
     else
       render 'new'
@@ -62,6 +62,6 @@ class PicturesController < ApplicationController
   end
 
   def set_picture
-    @picture = picture.find(params[:id])
+    @picture = Picture.find(params[:id])
   end
 end

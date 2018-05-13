@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Instagramclone</title>
+    <title>InstagramClone</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+
+    <header>
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">InstagramClone</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">InstagramClone</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="../">トップ</a>
+              </li>
+              <li>
+                <%= link_to "投稿一覧", pictures_path %>
+              </li>
+              <% if logged_in? %>
+                <li><%= link_to '投稿する', new_picture_path %></li>
+                <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+                <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <%= yield %>
+      <br>
+    </div>
+    <br>
+    <footer class="footer">
+      <p class="text-muted text-center">InstagramClone</p>
+      <p class="text-muted text-center">© 2018 Copyright  Tomoyuki Kurosawa</p>
+    </footer>
+
   </body>
 </html>
