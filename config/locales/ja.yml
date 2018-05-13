@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    models:
+      twtext: つぶやき
+      user: ユーザ
+      contact: お問い合わせ
+    attributes:
+      twtext:
+        content: つぶやき内容
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+      twtext:
+        content: つぶやき内容
+      contact:
+        name: 名前
+        email: メールアドレス
+        content: お問い合わせ内容
