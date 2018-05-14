@@ -1,26 +1,42 @@
 <%= form_with(model: @picture, url: pictures_path, local: true) do |form| %>
 <%= form.hidden_field :comment %>
 
-<div class="input-group" style="margin-bottom: 20px;">
-  <span class="input-group-addon">写真</span>
-  <ul class="list-group" style="margin-bottom: 0px;">
-    <li class="list-group-item">
-      <%= image_tag(@picture.image.url, :class => "img-thumbnail", :width => "300") %>
-      <%= hidden_field_tag :"cache[image]", @picture.image.cache_name %>
-    </li>
-  </ul>
-</div>
+<div class="list-group">
 
-<% if @picture.comment? %>
-  <div class="input-group">
-    <%= form.text_area :comment, class: 'form-control', readonly: 'readonly' %>
+  <div class="list-group-item">
+    <div class="media">
+
+      <div class="media-left">
+        <%= image_tag('/user_icon.png', :class => "img-circle", :style => "width: 32px; height: 32px; object-fit: cover;") unless current_user.image.url %>
+        <%= image_tag(current_user.image.url, :class => "img-circle", :style => "width: 32px; height: 32px; object-fit: cover;") if current_user.image.url %>
+      </div>
+      <div class="media-body">
+        <strong><%= current_user.name %></strong>
+      </div>
+    </div>
   </div>
-  <br>
-<% end %>
+
+  <div class="list-group-item">
+
+    <%= image_tag(@picture.image.url, :class => "", :style => "width: 100%;") %>
+    <%= hidden_field_tag :"cache[image]", @picture.image.cache_name %>
+
+  </div>
+  <% if @picture.comment? %>
+    <div class="list-group-item">
+
+      <div class="input-group">
+        <%= form.text_area :comment, class: 'form-control', readonly: 'readonly' %>
+      </div>
+
+    </div>
+  <% end %>
+</div>
 
 <div class="pull-right" style="margin-left: 20px;">
   <%= form.submit "投稿する", class: 'btn btn-primary' %>
 </div>
+
 <% end %>
 
 <%= form_with(model: @picture, url: new_picture_path, local: true, method: 'get') do |form| %>

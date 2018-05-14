@@ -51,13 +51,16 @@
       <div class="tab-pane active" id="favorite_pictures">
         <div class="row">
 
-        <% @user.favorite_pictures.order("updated_at DESC").each do |picture| %>
-          <div class="col-xs-4">
-            <div class="thum">
-             <%= link_to image_tag(picture.image.url, :class => "img-thumbnail", :style =>""), picture_path(picture.id) %>
+          <% @user.favorite_pictures.order("updated_at DESC").each do |picture| %>
+            <div class="col-xs-4">
+              <div class="thum">
+                <%= link_to image_tag(picture.image.url, :class => "img-thumbnail", :style =>""), picture_path(picture.id) %>
+              </div>
+              <p class="comment">
+                <strong>いいね！<%= picture.favorite_users.count %>件</strong>
+              </p>
             </div>
-        </div>
-        <% end %>
+          <% end %>
 
         </div>
       </div>
@@ -65,13 +68,16 @@
       <div class="tab-pane" id="my_pictures">
         <div class="row">
 
-        <% @user.pictures.order("updated_at DESC").each do |picture| %>
-          <div class="col-xs-4">
-            <div class="thum">
-            <%= link_to image_tag(picture.image.url, :class => "img-thumbnail", :style => ""), picture_path(picture.id) %>
+          <% @user.pictures.order("updated_at DESC").each do |picture| %>
+            <div class="col-xs-4">
+              <div class="thum">
+                <%= link_to image_tag(picture.image.url, :class => "img-thumbnail", :style => ""), picture_path(picture.id) %>
+              </div>
+                <p class="comment">
+                  <strong>いいね！<%= picture.favorite_users.count %>件</strong>
+                </p>
             </div>
-          </div>
-        <% end %>
+          <% end %>
 
         </div>
       </div>

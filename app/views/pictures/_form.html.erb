@@ -13,26 +13,46 @@
   </div>
 <% end %>
 
+<div class="list-group">
 
-<div class="input-group">
-  <span class="input-group-addon">写真を選択</span>
-  <% if @picture.image? %>
-    <ul class="list-group" style="margin-bottom: 0px;">
-      <li class="list-group-item">
-        <%= image_tag(@picture.image.url, :class => "img-thumbnail", :width => "300") %>
-      </li>
-    </ul>
-  <% end %>
-  <%= form.file_field :image, class: 'form-control', id: :picture_image%>
-  <%= form.hidden_field :image_cache %>
-</div>
-<br>
-<div class="input-group">
-  <%= form.text_area :comment, class: 'form-control', placeholder: "写真にコメントを添えましょう。（任意）" %>
-</div>
+  <div class="list-group-item">
+    <div class="media">
 
-<br>
-<div class="pull-right">
-  <%= form.submit "送信する", class: 'btn btn-primary' %>
+      <div class="media-left">
+        <%= image_tag('/user_icon.png', :class => "img-circle", :style => "width: 32px; height: 32px; object-fit: cover;") unless current_user.image.url %>
+        <%= image_tag(current_user.image.url, :class => "img-circle", :style => "width: 32px; height: 32px; object-fit: cover;") if current_user.image.url %>
+      </div>
+      <div class="media-body">
+        <strong><%= current_user.name %></strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="list-group-item">
+    <div class="input-group">
+      <span class="input-group-addon">写真を選択</span>
+      <% if @picture.image? %>
+        <ul class="list-group" style="margin-bottom: 0px;">
+          <li class="list-group-item">
+            <%= image_tag(@picture.image.url, :class => "img-thumbnail", :style => "width: 100%;") %>
+          </li>
+        </ul>
+      <% end %>
+      <%= form.file_field :image, class: 'form-control', id: :picture_image%>
+      <%= form.hidden_field :image_cache %>
+    </div>
+  </div>
+
+  <div class="list-group-item">
+    <div class="input-group">
+      <%= form.text_area :comment, class: 'form-control', placeholder: "写真にコメントを添えましょう。（任意）" %>
+    </div>
+
+  </div>
+  <br>
+  <div class="pull-right">
+    <%= form.submit "送信する", class: 'btn btn-primary' %>
+  </div>
+
 </div>
 <% end %>

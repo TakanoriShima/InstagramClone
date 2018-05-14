@@ -30,7 +30,9 @@
             <strong>いいね！<%= picture.favorite_users.count %>件</strong>
           </p>
           <p><%= picture.comment %></p>
-          <p><%= link_to picture.updated_at, picture_path(picture.id)%></p>
+          <time datetime="<%= picture.updated_at %>">
+            <%= link_to time_ago_in_words(picture.updated_at)+"前", picture_path(picture.id), alt: picture.updated_at %>
+          </time>
         </div>
         <div class="pull-right">
           <% if picture.user == current_user %>
