@@ -18,7 +18,9 @@
       </div>
       <div class="col-xs-10">
         <p class="lead"><%= @user.name %></p>
-        <p><%= @user.email %></p>
+        <% if @user == current_user %>
+          <p><%= @user.email %></p>
+        <% end %>
         <p>投稿<%= @user.pictures.count %>件</p>
       </div>
     </div>
