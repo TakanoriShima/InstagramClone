@@ -13,7 +13,7 @@
 
     <div class="row">
       <div class="col-xs-2">
-        <%= image_tag('/tw-icon.png', :style => "width: 83px; height: 83px; object-fit: cover;", :class => "img-circle") unless @user.image.url %>
+        <%= image_tag('/user_icon.png', :style => "width: 83px; height: 83px; object-fit: cover;", :class => "img-circle") unless @user.image.url %>
         <%= image_tag(@user.image.url, :style => "width: 83px; height: 83px; object-fit: cover;", :class => "img-circle") if @user.image.url %>
       </div>
       <div class="col-xs-10">
@@ -29,7 +29,7 @@
       <li class="active">
         <a href="#favorite_pictures" data-toggle="tab">
           <strong>
-            お気に入りの投稿
+            いいね！した投稿
             <span class="badge"><%= @user.favorite_pictures.count %></span>
           </strong>
         </a>
@@ -37,7 +37,7 @@
       <li>
         <a href="#my_pictures" data-toggle="tab">
           <strong>
-            自分の投稿
+            投稿一覧
             <span class="badge"><%= @user.pictures.count %></span>
           </strong>
         </a>
@@ -53,9 +53,10 @@
 
         <% @user.favorite_pictures.order("updated_at DESC").each do |picture| %>
           <div class="col-xs-4">
-            <!-- <%= image_tag(picture.image.url, :class => "img-thumbnail", :style => "width: 100%; object-fit: cover;") %> -->
-             <%= link_to image_tag(picture.image.url, :class => "img-thumbnail" ), picture_path(picture.id) %>
-          </div>
+            <div class="thum">
+             <%= link_to image_tag(picture.image.url, :class => "img-thumbnail", :style =>""), picture_path(picture.id) %>
+            </div>
+        </div>
         <% end %>
 
         </div>
@@ -66,7 +67,9 @@
 
         <% @user.pictures.order("updated_at DESC").each do |picture| %>
           <div class="col-xs-4">
-            <%= image_tag(picture.image.url, :class => "img-thumbnail", :style => "width: 100%; object-fit: cover;") %>
+            <div class="thum">
+            <%= link_to image_tag(picture.image.url, :class => "img-thumbnail", :style => ""), picture_path(picture.id) %>
+            </div>
           </div>
         <% end %>
 

@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
-    render 'top'
+    if logged_in?
+      @pictures = Picture.all
+      render 'pictures/index'
+    else
+      @user = User.new
+      render 'top'
+    end
   end
 
   def create

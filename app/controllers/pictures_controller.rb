@@ -29,14 +29,15 @@ class PicturesController < ApplicationController
     end
 
     if @picture.save
-      #PictureMailer.picture_mail(@picture).deliver
+      # PictureMailer.picture_mail(@picture).deliver
       redirect_to pictures_path, notice: '投稿しました >>> 投稿完了のメールを送信しました'
     else
       render 'new'
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @picture.update(picture_params)
@@ -52,7 +53,6 @@ class PicturesController < ApplicationController
   end
 
   def show
-    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   private

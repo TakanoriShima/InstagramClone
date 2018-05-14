@@ -4,7 +4,7 @@
     <div class="media">
 
       <div class="media-left">
-        <%= image_tag('/user_icon.png') unless picture.user.image.url %>
+        <%= image_tag('/user_icon.png', :class => "img-circle", :style => "width: 32px; height: 32px; object-fit: cover;") unless picture.user.image.url %>
         <%= image_tag(picture.user.image.url, :class => "img-circle", :style => "width: 32px; height: 32px; object-fit: cover;") if picture.user.image.url %>
       </div>
       <div class="media-body">
@@ -20,7 +20,7 @@
   <div class="list-group-item">
     <div class="media">
       <div class="pull-left">
-        <% @favorite = current_user.favorites.find_by(picture_id: picture.id) %>
+        <% @favorite = current_user.favorites.find_by(picture_id: picture.id) if logged_in? %>
           <p class="lead">
             <% if @favorite.present? %>
               <%= link_to '♥', favorite_path(picture), method: :delete %>
