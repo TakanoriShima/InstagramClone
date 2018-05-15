@@ -91,7 +91,7 @@ Rails.application.configure do
 
 
   # 追記
-  config.action_mailer.default_url_options = { host: 'dry-basin-97640' }
+  config.action_mailer.default_url_options = { host: 'enigmatic-fortress-61155' }
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     user_name: ENV['SENDGRID_USERNAME'],

@@ -37,7 +37,7 @@
         <div class="pull-right">
           <% if picture.user == current_user %>
             <%= link_to '編集', edit_picture_path(picture.id), class: 'btn btn-default btn-sm' %>
-            <%= link_to '削除', picture_path(picture.id), class: 'btn btn-danger btn-sm', method: :delete ,data: { confirm: 'つぶやきを本当に削除しますか？' } %>
+            <%= link_to '削除', picture_path(picture.id), class: 'btn btn-danger btn-sm', method: :delete ,data: { confirm: '本当に削除しますか？' } %>
           <% end %>
         </div>
 

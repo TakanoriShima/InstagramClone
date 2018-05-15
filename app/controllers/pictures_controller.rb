@@ -29,7 +29,7 @@ class PicturesController < ApplicationController
     end
 
     if @picture.save
-      # PictureMailer.picture_mail(@picture).deliver
+      PictureMailer.picture_mail(@picture).deliver
       redirect_to pictures_path, notice: '投稿しました >>> 投稿完了のメールを送信しました'
     else
       render 'new'
