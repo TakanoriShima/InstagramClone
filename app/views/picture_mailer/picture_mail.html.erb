@@ -1,7 +1,7 @@
 <h2>InstagramCloneに新しく投稿しました</h2>
 <p><%= @picture.user.name %>さん、投稿が完了しました。</p>
 <br>
-<p><%= link_to "投稿した内容はこちらからご確認ください", picture_url(@picture.id), alt: @picture.updated_at %></p>
+<p><%= link_to "投稿した内容はこちらからご確認ください",  "https://enigmatic-fortress-61155.herokuapp.com/pictures/"+@picture.id, alt: @picture.updated_at %></p>
 <p><%= @picture.updated_at %>に投稿</p>
 <br>
 <footer class="footer">
