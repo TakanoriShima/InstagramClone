@@ -12,11 +12,11 @@
     <% end %>
 
     <div class="row">
-      <div class="col-xs-2">
+      <div class="pull-left" style="margin: 0 20px">
         <%= image_tag('/user_icon.png', :style => "width: 83px; height: 83px; object-fit: cover;", :class => "img-circle") unless @user.image.url %>
         <%= image_tag(@user.image.url, :style => "width: 83px; height: 83px; object-fit: cover;", :class => "img-circle") if @user.image.url %>
       </div>
-      <div class="col-xs-10">
+      <div class="pull-left">
         <p class="lead"><%= @user.name %></p>
         <% if @user == current_user %>
           <p><%= @user.email %></p>
