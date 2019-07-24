@@ -1,8 +1,13 @@
+require 'carrierwave/storage/abstract'
+require 'carrierwave/storage/file'
+require 'carrierwave/storage/fog'
+
+
 if Rails.env.development?                                                                                                                   
   CarrierWave.configure do |config|
     # developmentのもろもろの設定
-    config.cache_storage = :file
-    config.storage = :file
+    config.cache_storage = :fog
+    config.storage = :fog
   end 
 elsif Rails.env.test?
   CarrierWave.configure do |config|
