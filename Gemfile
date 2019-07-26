@@ -44,6 +44,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 #gem 'fog'
 #by shima
+gem 'aws-sdk', '~> 2'
 gem 'fog-aws'
 gem 'jquery-rails'
 #by shima
