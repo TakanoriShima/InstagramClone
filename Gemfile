@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# 追加
+# 追加 by shima
 gem 'rails-i18n'
 
 gem 'bcrypt', '3.1.11'
@@ -50,6 +50,7 @@ gem 'jquery-rails'
 #by shima
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sprockets', '~>3.7.2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
